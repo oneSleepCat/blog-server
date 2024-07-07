@@ -5,7 +5,7 @@ let REDIS_CONF; // Redis 配置
 
 if (env === 'dev') {
   MYSQL_CONF = {
-    hots: 'localhost',
+    host: 'localhost',
     user: 'root',
     password: 'mysql_2024',
     port: '3306',
@@ -20,7 +20,7 @@ if (env === 'dev') {
 
 if (env === 'prod') {
   MYSQL_CONF = {
-    hots: '120.26.123.78',
+    host: '120.26.123.78',
     user: 'root',
     password: 'mysql_2024',
     port: '3306',

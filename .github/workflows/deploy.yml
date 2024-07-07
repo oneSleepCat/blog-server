@@ -1,0 +1,42 @@
+name: deploy blog server
+
+on:
+  push:
+    branches:
+      - 'main' # 针对 main 分支
+    paths:
+      - '.github/workflows/*'
+      - 'src/**'
+      - 'bin/www'
+      - 'package.json'
+  
+jobs: 
+    deploy:
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v2 # 第三方 action
+
+        - name: set id_sra # 设置 id_sra 
+          run: |
+            mkdir -p ~/.ssh/
+            echo "${{secrets.MY_ID_RSA}}" > ~/.ssh/id_rsa
+            chmod 600 ~/.ssh/id_rsa
+            ssh-keyscan 120.26.123.78 >> ~/.ssh/known_hosts
+
+        - name: deploy # 自动发布
+          run: |
+            ssh root@120.26.123.78 "
+              # 服务器已经执行过 git clone 到 /root/project/blog-server
+              cd /root/project/blog-server;
+              git checkout . ;
+              git checkout main;
+              git pull origin main;
+
+              # 重启服务
+              npm install;
+              npm run prd;
+            "
+
+        - name: delete id_rsa # 及时删除 id_rsa
+          run: rm -rf ~/.ssh/id_rsa
