@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node bin/www",
     "dev": "cross-env NODE_ENV=dev ./node_modules/.bin/nodemon bin/www",
+    "dev:prd": "cross-env NODE_ENV=prod ./node_modules/.bin/nodemon bin/www",
     "prd": "cross-env NODE_ENV=prod pm2 start pm2.config.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,9 +25,10 @@
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "koa-views": "^6.2.0",
-    "mysql": "^2.18.1",
+    "mysql2": "^3.10.2",
     "pug": "^2.0.3",
     "redis": "^4.6.15",
+    "sequelize": "^6.37.3",
     "xss": "^1.0.15"
   },
   "devDependencies": {

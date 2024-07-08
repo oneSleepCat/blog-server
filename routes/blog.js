@@ -1,5 +1,4 @@
 const router = require('koa-router')();
-const dayjs = require('dayjs');
 const {
   getBlogList,
   getBlogDetail,
@@ -31,9 +30,15 @@ router.post('/detail', async (ctx, next) => {
   try {
     const { id } = ctx.request.body;
     const result = await getBlogDetail({ id });
-    ctx.body = new SuccessModel({
-      data: result,
-    });
+    if (result) {
+      ctx.body = new SuccessModel({
+        data: result,
+      });
+    } else {
+      ctx.body = new ErrorModel({
+        message: '该博客不存在',
+      });
+    }
   } catch (error) {
     ctx.body = new ErrorModel({
       message: error,
@@ -51,12 +56,11 @@ router.post('/new', loginCheck, async (ctx, next) => {
       title,
       content,
       author,
-      createTime: dayjs().valueOf(),
     });
 
-    if (result.insertId) {
+    if (result.id) {
       ctx.body = new SuccessModel({
-        data: { id: result.insertId },
+        data: { id: result.id },
         message: '创建成功',
       });
     } else {
@@ -77,7 +81,7 @@ router.post('/update', async (ctx, next) => {
 
     const result = await updateBlog({ id, title, content });
 
-    if (result.affectedRows !== 0) {
+    if (result[0]) {
       ctx.body = new SuccessModel({
         data: null,
         message: '更新成功',
@@ -98,7 +102,7 @@ router.post('/del', async (ctx, next) => {
   try {
     const { id } = ctx.request.body;
     const result = await deleteBlog({ id });
-    if (result.affectedRows !== 0) {
+    if (result !== 0) {
       ctx.body = new SuccessModel({
         data: null,
         message: '删除成功',

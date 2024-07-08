@@ -1,8 +1,30 @@
 const router = require('koa-router')();
 const { SuccessModel, ErrorModel } = require('../model/resModel');
-const { login } = require('../controller/user');
+const { login, register } = require('../controller/user');
 
 router.prefix('/api/user');
+
+router.post('/register', async (ctx, next) => {
+  try {
+    const { username, password, realname } = ctx.request.body;
+
+    const result = await register({ username, password, realname });
+
+    if (result?.id) {
+      ctx.body = new SuccessModel({
+        message: '注册成功',
+      });
+    } else {
+      ctx.body = new ErrorModel({
+        message: '注册失败',
+      });
+    }
+  } catch (error) {
+    ctx.body = new ErrorModel({
+      message: error || '注册失败',
+    });
+  }
+});
 
 router.post('/login', async (ctx, next) => {
   try {
@@ -10,9 +32,9 @@ router.post('/login', async (ctx, next) => {
 
     const result = await login({ username, password });
 
-    if (result.length > 0) {
-      ctx.session.username = result[0]?.username;
-      ctx.session.realname = result[0]?.realname;
+    if (result) {
+      ctx.session.username = result.username;
+      ctx.session.realname = result.realname;
       ctx.body = new SuccessModel({
         message: '登陆成功',
       });
