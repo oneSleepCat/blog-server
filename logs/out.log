@@ -1,0 +1,25 @@
+2024-07-08 22:19:40:   <-- GET /api/test/env
+2024-07-08 22:19:40: GET /api/test/env - 2ms
+2024-07-08 22:19:40: [0mGET /api/test/env [32m200[0m 2.285 ms - 52[0m
+2024-07-08 22:19:40:   --> GET /api/test/env 200 8ms 43b
+2024-07-08 22:19:58:   <-- GET /api/blog/list?author=zhangsan
+2024-07-08 22:19:58: GET /api/blog/list?author=zhangsan - 21ms
+2024-07-08 22:19:58: [0mGET /api/blog/list?author=zhangsan [32m200[0m 20.927 ms - 47[0m
+2024-07-08 22:19:58:   --> GET /api/blog/list?author=zhangsan 200 25ms 34b
+2024-07-08 22:20:13:   <-- POST /api/user/login
+2024-07-08 22:20:13: login '123'
+2024-07-08 22:20:13: POST /api/user/login - 19ms
+2024-07-08 22:20:13: [0mPOST /api/user/login [32m200[0m 20.029 ms - 61[0m
+2024-07-08 22:20:13:   --> POST /api/user/login 200 23ms 48b
+2024-07-09 01:02:18:   <-- GET /api/blog/list?author=xiaohua
+2024-07-09 01:02:18: Executing (default): SELECT `id`, `title`, `content`, `author`, `createdAt`, `updatedAt` FROM `blogs` AS `blog` WHERE `blog`.`author` = 'xiaohua' AND `blog`.`title` LIKE '%%' ORDER BY `blog`.`id` DESC;
+2024-07-09 01:02:18: GET /api/blog/list?author=xiaohua - 29ms
+2024-07-09 01:02:18:   --> GET /api/blog/list?author=xiaohua 200 36ms 177b
+2024-07-09 01:02:23:   <-- POST /api/user/login
+2024-07-09 01:02:23: Executing (default): SELECT `id`, `username`, `password`, `realname`, `createdAt`, `updatedAt` FROM `users` AS `user` WHERE `user`.`username` = 'xiaohua' AND `user`.`password` = '2fb4deb8f4bdc7be36244ae8f75f6fe1' LIMIT 1;
+2024-07-09 01:02:23: POST /api/user/login - 21ms
+2024-07-09 01:02:23:   --> POST /api/user/login 200 25ms 48b
+2024-07-09 01:02:29:   <-- POST /api/blog/new
+2024-07-09 01:02:29: Executing (default): INSERT INTO `blogs` (`id`,`title`,`content`,`author`,`createdAt`,`updatedAt`) VALUES (DEFAULT,?,?,?,?,?);
+2024-07-09 01:02:29: POST /api/blog/new - 18ms
+2024-07-09 01:02:29:   --> POST /api/blog/new 200 21ms 52b
