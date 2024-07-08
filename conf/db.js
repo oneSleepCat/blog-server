@@ -9,7 +9,7 @@ if (env === 'dev') {
     user: 'root',
     password: 'mysql_2024',
     port: '3306',
-    database: 'studyBlog',
+    database: 'blogData',
   };
 
   REDIS_CONF = {
