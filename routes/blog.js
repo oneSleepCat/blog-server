@@ -75,11 +75,13 @@ router.post('/new', loginCheck, async (ctx, next) => {
   }
 });
 
-router.post('/update', async (ctx, next) => {
+router.post('/update', loginCheck, async (ctx, next) => {
   try {
     const { id, title, content } = ctx.request.body;
 
-    const result = await updateBlog({ id, title, content });
+    const author = ctx.session.username;
+
+    const result = await updateBlog({ id, title, content, author });
 
     if (result[0]) {
       ctx.body = new SuccessModel({
@@ -98,10 +100,11 @@ router.post('/update', async (ctx, next) => {
   }
 });
 
-router.post('/del', async (ctx, next) => {
+router.post('/del', loginCheck, async (ctx, next) => {
   try {
     const { id } = ctx.request.body;
-    const result = await deleteBlog({ id });
+    const author = ctx.session.username;
+    const result = await deleteBlog({ id, author });
     if (result !== 0) {
       ctx.body = new SuccessModel({
         data: null,

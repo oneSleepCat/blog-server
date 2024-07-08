@@ -63,6 +63,7 @@ const updateBlog = async params => {
     {
       where: {
         id,
+        author,
       },
     }
   );
@@ -71,11 +72,12 @@ const updateBlog = async params => {
 };
 
 const deleteBlog = async params => {
-  const { id } = params;
+  const { id, author } = params;
 
   const result = await Blog.destroy({
     where: {
       id,
+      author,
     },
   });
 
