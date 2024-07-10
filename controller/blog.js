@@ -131,9 +131,7 @@ const deleteBlog = async params => {
 
 // const deleteBlog = async params => {
 //   const { id } = params;
-
 //   const sql = `delete from blogs where id=${id}`;
-
 //   return await exec(sql);
 // };
 
