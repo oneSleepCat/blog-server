@@ -26,7 +26,7 @@ onerror(app);
 
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin: 'http://localhost:8000',
     allowMethods: ['GET', 'POST'],
     credentials: true,
   })
