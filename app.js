@@ -26,7 +26,12 @@ onerror(app);
 
 app.use(
   cors({
-    origin: 'http://localhost:8000',
+    origin: () => {
+      if (ENV === 'prod') {
+        return 'https://blog.chenruiweb.com';
+      }
+      return 'https://localhost:8000';
+    },
     allowMethods: ['GET', 'POST'],
     credentials: true,
   })
