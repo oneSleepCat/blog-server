@@ -8,6 +8,7 @@ const logger = require('koa-logger');
 const session = require('koa-generic-session');
 const redisStore = require('koa-redis');
 const morgan = require('koa-morgan');
+const cors = require('koa2-cors');
 const path = require('path');
 const fs = require('fs');
 const { REDIS_CONF } = require('./conf/db');
@@ -22,6 +23,14 @@ const ENV = process.env.NODE_ENV;
 
 // error handler
 onerror(app);
+
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+    allowMethods: ['GET', 'POST'],
+    credentials: true,
+  })
+);
 
 // middlewares
 app.use(
