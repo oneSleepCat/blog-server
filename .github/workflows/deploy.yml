@@ -9,6 +9,14 @@ on:
       - 'src/**'
       - 'bin/www'
       - 'package.json'
+      - 'app.js'
+      - 'utils/**'
+      - 'routes/**'
+      - 'public/**'
+      - 'model/**'
+      - 'middleware/**'
+      - '**'
+
   
 jobs: 
     deploy:
