@@ -26,9 +26,10 @@ onerror(app);
 
 app.use(
   cors({
-    origin: () => {
-      if (ENV === 'prod') {
-        return 'http://b.chenruiweb.com';
+    origin: ctx => {
+      const { origin } = ctx.request.header;
+      if (ENV === 'prod' && origin.includes('chenruiweb.com')) {
+        return origin;
       }
       return 'http://localhost:8000';
     },
