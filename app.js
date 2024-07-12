@@ -34,6 +34,7 @@ app.use(
       return 'http://localhost:8000';
     },
     allowMethods: ['GET', 'POST'],
+    allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
     credentials: true,
   })
 );
