@@ -28,9 +28,9 @@ app.use(
   cors({
     origin: () => {
       if (ENV === 'prod') {
-        return 'https://blog.chenruiweb.com';
+        return 'http://b.chenruiweb.com';
       }
-      return 'https://localhost:8000';
+      return 'http://localhost:8000';
     },
     allowMethods: ['GET', 'POST'],
     credentials: true,
